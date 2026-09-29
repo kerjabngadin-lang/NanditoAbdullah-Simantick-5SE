@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Portal Praktikum Simantic Web</title>
+  <link rel="stylesheet" href="assets/css/output.css">
+</head>
+<body>
+  <script>if(!(sessionStorage.getItem('spw_session')||localStorage.getItem('spw_session'))){location.replace('login.html');}</script>
+  <div id="sessionBar"></div>
+  <div class="hero"><div class="w">
+    <div class="eyebrow">Portal Praktikum Simantic Web</div>
+    <h1>Kumpulan Tugas<br>Praktikum</h1>
+    <p>Satu halaman untuk membuka seluruh tugas yang sudah dikerjakan. Tambahkan tugas berikutnya cukup dengan satu baris data.</p>
+    <a class="btn w1" href="#daftar">Lihat Tugas</a>
+    <a class="btn gh" href="#cara" onclick="document.getElementById('cara').open=true">Cara Menambah Tugas</a>
+  </div></div>
+
+  <div class="w" style="padding:0 16px">
+    <div class="bar">
+      <div><div class="lbl">Ringkasan</div><h2 id="cnt" style="margin:4px 0 0"></h2></div>
+      <div style="min-width:240px;flex:1;max-width:360px">
+        <div class="lbl">Cari tugas</div>
+        <input id="q" placeholder="Contoh: RDF, Hardware, Ontologi...">
+      </div>
+    </div>
+    <div id="daftar" style="margin-top:40px">
+      <div class="lbl" style="color:var(--pr)">Daftar Tugas</div>
+      <h2 style="margin:4px 0">Praktikum yang Sudah Dikerjakan</h2>
+    </div>
+    <div class="grid" id="grid"></div>
+    <details id="cara" class="pnl"><summary>Cara menambah tugas</summary>
+      <p>1. Buat file baru di folder <code>pages/</code> (contoh: <code>tugas3_xxx.html</code>).<br>
+         2. Buka <code>assets/js/portal.js</code>, tambahkan satu objek baru di array <code>TASKS</code>.<br>
+         3. Kartu akan muncul otomatis dan bisa dicari.</p>
+    </details>
+  </div>
+
+  <footer>Tugas Praktikum Simantic Web 2026 - Nandito Abdullah Npm - 241055201025</footer>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/portal.js"></script>
+  <script>renderSessionBar('sessionBar', 'login.html');</script>
+</body>
+</html>

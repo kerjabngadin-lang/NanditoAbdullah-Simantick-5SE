@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Masuk - Portal Praktikum Simantic Web</title>
+  <link rel="stylesheet" href="assets/css/output.css">
+  <style>
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(135deg,var(--pr),var(--pr2))}
+    .login-card{background:var(--card);border-radius:16px;padding:32px;max-width:380px;width:100%;box-shadow:0 20px 50px rgba(15,23,42,.25)}
+    .login-card h1{font-size:1.4rem;margin:.2em 0 4px}
+    .login-card p.sub{color:var(--mut);font-size:.85rem;margin:0 0 22px}
+    .field{margin-bottom:14px}
+    .field .lbl{margin-bottom:6px;display:block}
+    .err{color:#dc2626;font-size:.82rem;min-height:1.2em;margin:2px 0 10px}
+    .chk{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--mut);margin:2px 0 18px}
+    .chk input{width:auto}
+    .hint{font-size:.75rem;color:var(--mut);margin-top:18px;border-top:1px solid var(--bd);padding-top:14px}
+  </style>
+</head>
+<body>
+  <div class="login-wrap"><div class="login-card">
+    <div class="eyebrow" style="color:var(--pr)">Portal Praktikum Simantic Web</div>
+    <h1>Masuk ke Portal</h1>
+    <p class="sub">Gunakan akun yang sudah didaftarkan untuk membuka daftar tugas.</p>
+    <form id="f" autocomplete="off">
+      <div class="field"><div class="lbl">Username</div><input id="u" placeholder="username" autofocus></div>
+      <div class="field"><div class="lbl">Password</div><input id="p" type="password" placeholder="Password"></div>
+      <label class="chk"><input type="checkbox" id="r"> Ingat saya di perangkat ini</label>
+      <div class="err" id="e"></div>
+      <button class="btn" style="width:100%" id="go" type="submit">Masuk</button>
+    </form>
+    <p class="hint">Akun contoh: <b>nandito</b> / <b>241055201025</b>. Bisa diganti di <code>assets/js/auth.js</code>.</p>
+  </div></div>
+
+  <script src="assets/js/auth.js"></script>
+  <script>
+    // Kalau sudah pernah login, langsung masuk ke portal.
+    if (getSession()) location.replace('index.html');
+
+    document.getElementById('f').addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const btn = document.getElementById('go');
+      const errEl = document.getElementById('e');
+      errEl.textContent = '';
+      btn.disabled = true; btn.textContent = 'Memeriksa...';
+      const res = await attemptLogin(document.getElementById('u').value, document.getElementById('p').value);
+      if (!res.ok) {
+        errEl.textContent = res.message;
+        btn.disabled = false; btn.textContent = 'Masuk';
+        return;
+      }
+      saveSession(res.session, document.getElementById('r').checked);
+      location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
